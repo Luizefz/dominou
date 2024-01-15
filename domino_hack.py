@@ -17,30 +17,29 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: int) -> None
             jogador_00_cabecas_jogadas.append(cabeca)
             if peca_jogada in pecas_disponiveis:
                 pecas_disponiveis.remove(peca_jogada)
-                jogador_00_pecas_restantes -= 1
-                
-            return print('Peça não disponível')
+                jogador_00_pecas_restantes -= 1    
+            else: print('Peça não disponível')
+            
         case 1:
             jogador_01_cabecas_jogadas.append(cabeca)
             if peca_jogada in pecas_disponiveis:
                 pecas_disponiveis.remove(peca_jogada)
                 jogador_01_pecas_restantes -= 1
-                
-            return print('Peça não disponível')
+            else: print('Peça não disponível')
+            
         case 2:
             jogador_02_cabecas_jogadas.append(cabeca)
             if peca_jogada in pecas_disponiveis:
                 pecas_disponiveis.remove(peca_jogada)
                 jogador_02_pecas_restantes -= 1
-                
-            return print('Peça não disponível')
+            else: print('Peça não disponível')
+            
         case 3:
             jogador_03_cabecas_jogadas.append(cabeca)
             if peca_jogada in pecas_disponiveis:
                 pecas_disponiveis.remove(peca_jogada)
                 jogador_03_pecas_restantes -= 1
-                
-            return print('Peça não disponível')
+            else: print('Peça não disponível')
 
 def guardar_minhas_pecas(pecas_inseridas) -> list:
     pecas_na_mao = []
@@ -62,8 +61,6 @@ jogador_00 = guardar_minhas_pecas(x)
 jogador_01 = []
 jogador_02 = []
 jogador_03 = []
-
-print(pecas_disponiveis)
 
 jogador_00_cabecas_jogadas = []
 jogador_01_cabecas_jogadas = []
