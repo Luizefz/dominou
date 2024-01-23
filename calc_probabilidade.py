@@ -11,8 +11,8 @@ dicionario_teste = {
 }
 
 dicionario_pecas_peso = {
-    (0, 0): 1, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1,
-    (1, 1): 1, (1, 2): 1, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1,
+    (0, 0): 2, (0, 1): 2, (0, 2): 1, (0, 3): 2, (0, 4): 2, (0, 5): 2, (0, 6): 2,
+    (1, 1): 5, (1, 2): 1, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1,
     (2, 2): 1, (2, 3): 1, (2, 4): 1, (2, 5): 1, (2, 6): 1,
     (3, 3): 1, (3, 4): 1, (3, 5): 1, (3, 6): 1,
     (4, 4): 1, (4, 5): 1, (4, 6): 1,
@@ -54,18 +54,33 @@ def verifica_peca_sorteio(pecas_disponiveis: dict, pecas_pesos, quant_pecas_sort
     return pecas_disponiveis
 
 
-def calcula_probabilidade_pecas(pecas_disponiveis: dict, pecas_pesos: dict, quant_pecas_sorteadas: int):
-    for i in range(100):
+def calcula_probabilidade_pecas(pecas_disponiveis: dict, pecas_pesos: dict, quant_pecas_sorteadas: int, num_repeticoes: int):
+
+    # Verifica quais elementos não estão na segunda lista de pesos
+    elementos_faltando = set(pecas_pesos.keys()) - \
+        set(pecas_disponiveis.keys())
+
+    # Remove os pesos correspondentes dos elementos ausentes
+    for elemento in elementos_faltando:
+        pecas_pesos.pop(elemento, None)
+
+    for _ in range(num_repeticoes):
         s = verifica_peca_sorteio(
             pecas_disponiveis, pecas_pesos, quant_pecas_sorteadas)
         dicionario_probabilidades = s
 
-    # Ordena o dicionário deacordo com os maiores valores
+        total_soma = sum(dicionario_probabilidades.values())
+
+        # Normaliza os valores para que a soma seja 100%
+        for chave, elem in dicionario_probabilidades.items():
+            dicionario_probabilidades[chave] = round(100 * elem/total_soma, 2)
+
+        # Ordena o dicionário deacordo com os maiores valores
     dicionario_probabilidades = dict(sorted(
         dicionario_probabilidades.items(), key=lambda item: item[1], reverse=True))
+
     return dicionario_probabilidades
 
 
-print(calcula_probabilidade_pecas(dicionario_teste, dicionario_pecas_peso, 6))
-
-# print([dicionario_pecas_peso[peca] for peca in dicionario_pecas_peso])
+# print(calcula_probabilidade_pecas(
+#     dicionario_teste, dicionario_pecas_peso, 6, 1000))

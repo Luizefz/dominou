@@ -65,13 +65,13 @@ def guardar_minhas_pecas(pecas_inseridas) -> list:
     return pecas_na_mao
 
 
-pecas_disponiveis = {(0, 0): 0, (0, 1): 0, (0, 2): 0, (0, 3): 0, (0, 4): 0, (0, 5): 0, (0, 6): 0,
-                     (1, 1): 0, (1, 2): 0, (1, 3): 0, (1, 4): 0, (1, 5): 0, (1, 6): 0,
-                     (2, 2): 0, (2, 3): 0, (2, 4): 0, (2, 5): 0, (2, 6): 0,
-                     (3, 3): 0, (3, 4): 0, (3, 5): 0, (3, 6): 0,
-                     (4, 4): 0, (4, 5): 0, (4, 6): 0,
-                     (5, 5): 0, (5, 6): 0,
-                     (6, 6): 0}
+pecas_disponiveis = {(0, 0): 1, (0, 1): 1, (0, 2): 1, (0, 3): 1, (0, 4): 1, (0, 5): 1, (0, 6): 1,
+                     (1, 1): 1, (1, 2): 1, (1, 3): 1, (1, 4): 1, (1, 5): 1, (1, 6): 1,
+                     (2, 2): 1, (2, 3): 1, (2, 4): 1, (2, 5): 1, (2, 6): 1,
+                     (3, 3): 1, (3, 4): 1, (3, 5): 1, (3, 6): 1,
+                     (4, 4): 1, (4, 5): 1, (4, 6): 1,
+                     (5, 5): 1, (5, 6): 1,
+                     (6, 6): 1}
 
 
 jogador_00 = jogador()
@@ -89,7 +89,7 @@ while True:
         break
 
     print(f'\npecas restantes jogador 00: {jogador_00.retorna_pecas_restantes()}\npeca restantes jogador 01: {jogador_01.retorna_pecas_restantes()}\npeca restantes jogador 02: {jogador_02.retorna_pecas_restantes()}\npeca restantes jogador 03: {jogador_03.retorna_pecas_restantes()}\n')
-    print(f'pecas disponiveis: \n{pecas_disponiveis}\n')
+    print(f'pecas disponiveis: \n{list(pecas_disponiveis.keys())}\n')
     # print(f'Pesos Jogador00: \n{jogador_00.retorna_pecas_peso()}\n Pesos Jogador01: \n{jogador_01.retorna_pecas_peso()}\n Pesos Jogador02: \n{jogador_02.retorna_pecas_peso()}\n Pesos Jogador03: \n{jogador_03.retorna_pecas_peso()}\n')
 
     jogador_vez, peca_jogada, cabeca = input(
@@ -98,5 +98,15 @@ while True:
     # Caso na primeira rodada ninguém tenha o (6,6) o jogador 4 (dorme) está com o (6,6)
     if rodada == 1 and peca_jogada != '(6,6)':
         pecas_jogadas_jogador(4, (6, 6), 6)
+
+    todo_mundo_jogou = rodada // 2
+
+    if todo_mundo_jogou:
+        print('\nCalculando probabilidade das peças...')
+        print(f'\nJogador 01: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_01.retorna_pecas_peso(), jogador_01.retorna_pecas_restantes(), 1000)}')
+        print(f'\nJogador 02: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_02.retorna_pecas_peso(), jogador_02.retorna_pecas_restantes(), 1000)}')
+        print(f'\nJogador 03: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_03.retorna_pecas_peso(), jogador_03.retorna_pecas_restantes(), 1000)}')
+
+        print(f'\nAnalise e escolha a melhor peça para jogar.')
 
     pecas_jogadas_jogador(int(jogador_vez), eval(peca_jogada), int(cabeca))
