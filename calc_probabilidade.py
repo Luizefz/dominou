@@ -75,11 +75,15 @@ def calcula_probabilidade_pecas(pecas_disponiveis: dict, pecas_pesos: dict, quan
         for chave, elem in dicionario_probabilidades.items():
             dicionario_probabilidades[chave] = round(100 * elem/total_soma, 2)
 
-        # Ordena o dicionário deacordo com os maiores valores
+    # Ordena o dicionário deacordo com os maiores valores
     dicionario_probabilidades = dict(sorted(
         dicionario_probabilidades.items(), key=lambda item: item[1], reverse=True))
 
-    return dicionario_probabilidades
+    # Transforma os valores em strings para adicionar o símbolo de porcentagem
+    for chave, valor in dicionario_probabilidades.items():
+        dicionario_probabilidades[chave] = f"{valor}%"
+
+    return dicionario_probabilidades        
 
 
 # print(calcula_probabilidade_pecas(

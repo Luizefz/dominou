@@ -1,4 +1,4 @@
-from jogador import jogador
+from domino_classes import jogador, dorme
 from calc_probabilidade import calcula_probabilidade_pecas
 
 
@@ -42,12 +42,12 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: str) -> None
                 print('Peça não disponível')
 
         # case 4:
-        #     dorme.append(peca_jogada)
+        #     pecas_dorme.guardar_cabeca_jogada(cabeca)
         #     if peca_jogada in pecas_disponiveis:
-        #         pecas_disponiveis.remove(peca_jogada)
-        #     else: print('Peça não disponível')
-
-        #     print(f"Add (6,6) dorme: {dorme}")
+        #         del pecas_disponiveis[peca_jogada]
+        #         pecas_dorme.diminue_quant_pecas_restantes()
+        #     else:
+        #         print('Peça não disponível')
 
 
 def guardar_minhas_pecas(pecas_inseridas) -> list:
@@ -78,6 +78,7 @@ jogador_00 = jogador()
 jogador_01 = jogador()
 jogador_02 = jogador()
 jogador_03 = jogador()
+pecas_dorme = dorme()
 
 rodada = 0
 
@@ -100,12 +101,27 @@ while True:
         pecas_jogadas_jogador(4, (6, 6), 6)
 
     todo_mundo_jogou = rodada // 2
-
+    # REMOVE ESSA PEXTE AQUI PRARVER SE VAI FUNCINAR
     if todo_mundo_jogou:
         print('\nCalculando probabilidade das peças...')
-        print(f'\nJogador 01: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_01.retorna_pecas_peso(), jogador_01.retorna_pecas_restantes(), 1000)}')
-        print(f'\nJogador 02: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_02.retorna_pecas_peso(), jogador_02.retorna_pecas_restantes(), 1000)}')
-        print(f'\nJogador 03: {calcula_probabilidade_pecas(pecas_disponiveis, jogador_03.retorna_pecas_peso(), jogador_03.retorna_pecas_restantes(), 1000)}')
+
+        probalidade_pecas_jogador_01 = calcula_probabilidade_pecas(
+            pecas_disponiveis, jogador_01.retorna_pecas_peso(), jogador_01.retorna_pecas_restantes(), 1000)
+        probalidade_pecas_jogador_02 = calcula_probabilidade_pecas(
+            pecas_disponiveis, jogador_02.retorna_pecas_peso(), jogador_02.retorna_pecas_restantes(), 1000)
+        probalidade_pecas_jogador_03 = calcula_probabilidade_pecas(
+            pecas_disponiveis, jogador_03.retorna_pecas_peso(), jogador_03.retorna_pecas_restantes(), 1000)
+        probalidade_pecas_dorme = calcula_probabilidade_pecas(
+            pecas_disponiveis, pecas_dorme.retorna_pecas_peso(), pecas_dorme.retorna_pecas_restantes(), 1000)
+
+        print(f'\nJogador 01: {probalidade_pecas_jogador_01}')
+        print(f'\nJogador 01 pesos: {jogador_01.retorna_pecas_peso()}')
+        print(f'\nJogador 02: {probalidade_pecas_jogador_02}')
+        print(f'\nJogador 02 pesos: {jogador_02.retorna_pecas_peso()}')
+        print(f'\nJogador 03: {probalidade_pecas_jogador_03}')
+        # print(f'\nJogador 03 pesos: {jogador_03.retorna_pecas_peso()}')
+        # print(f'\nDorme: {probalidade_pecas_dorme}')
+        print(pecas_dorme.retorna_pecas_peso())
 
         print(f'\nAnalise e escolha a melhor peça para jogar.')
 
