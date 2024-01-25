@@ -11,6 +11,7 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: str) -> None
     match jogador:
         case 0:
             jogador_00.guardar_cabeca_jogada(cabeca)
+            pecas_dorme.guardar_cabeca_jogada(cabeca)
             if peca_jogada in pecas_disponiveis:
                 del pecas_disponiveis[peca_jogada]
                 jogador_00.diminue_quant_pecas_restantes()
@@ -19,6 +20,7 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: str) -> None
 
         case 1:
             jogador_01.guardar_cabeca_jogada(cabeca)
+            pecas_dorme.guardar_cabeca_jogada(cabeca)
             if peca_jogada in pecas_disponiveis:
                 del pecas_disponiveis[peca_jogada]
                 jogador_01.diminue_quant_pecas_restantes()
@@ -27,6 +29,7 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: str) -> None
 
         case 2:
             jogador_02.guardar_cabeca_jogada(cabeca)
+            pecas_dorme.guardar_cabeca_jogada(cabeca)
             if peca_jogada in pecas_disponiveis:
                 del pecas_disponiveis[peca_jogada]
                 jogador_02.diminue_quant_pecas_restantes()
@@ -35,26 +38,26 @@ def pecas_jogadas_jogador(jogador: int, peca_jogada: tuple, cabeca: str) -> None
 
         case 3:
             jogador_03.guardar_cabeca_jogada(cabeca)
+            pecas_dorme.guardar_cabeca_jogada(cabeca)
             if peca_jogada in pecas_disponiveis:
                 del pecas_disponiveis[peca_jogada]
                 jogador_03.diminue_quant_pecas_restantes()
             else:
                 print('Peça não disponível')
 
-        # case 4:
-        #     pecas_dorme.guardar_cabeca_jogada(cabeca)
-        #     if peca_jogada in pecas_disponiveis:
-        #         del pecas_disponiveis[peca_jogada]
-        #         pecas_dorme.diminue_quant_pecas_restantes()
-        #     else:
-        #         print('Peça não disponível')
+        case 4:
+            pecas_dorme.guardar_cabeca_jogada(cabeca)
+            if peca_jogada in pecas_disponiveis:
+                del pecas_disponiveis[peca_jogada]
+                pecas_dorme.diminue_quant_pecas_restantes()
+            else:
+                print('Peça não disponível')
 
 
 def guardar_minhas_pecas(pecas_inseridas) -> list:
     pecas_na_mao = []
 
     # As peças do jogador 00 são removidas da lista de peças disponíveis e retorna suas peças
-    # if type(pecas_inseridas) == list:
     for peca in pecas_inseridas:
         pecas_na_mao.append(peca)
         del pecas_disponiveis[peca]
@@ -91,17 +94,17 @@ while True:
 
     print(f'\npecas restantes jogador 00: {jogador_00.retorna_pecas_restantes()}\npeca restantes jogador 01: {jogador_01.retorna_pecas_restantes()}\npeca restantes jogador 02: {jogador_02.retorna_pecas_restantes()}\npeca restantes jogador 03: {jogador_03.retorna_pecas_restantes()}\n')
     print(f'pecas disponiveis: \n{list(pecas_disponiveis.keys())}\n')
-    # print(f'Pesos Jogador00: \n{jogador_00.retorna_pecas_peso()}\n Pesos Jogador01: \n{jogador_01.retorna_pecas_peso()}\n Pesos Jogador02: \n{jogador_02.retorna_pecas_peso()}\n Pesos Jogador03: \n{jogador_03.retorna_pecas_peso()}\n')
 
     jogador_vez, peca_jogada, cabeca = input(
         'Insira respectivamente:\njogador da vez | peça jogada Ex: (0, 0) | cabeca-jogada\n').split()
+    pecas_jogadas_jogador(int(jogador_vez), eval(peca_jogada), int(cabeca))
 
     # Caso na primeira rodada ninguém tenha o (6,6) o jogador 4 (dorme) está com o (6,6)
     if rodada == 1 and peca_jogada != '(6,6)':
         pecas_jogadas_jogador(4, (6, 6), 6)
 
-    todo_mundo_jogou = rodada // 2
-    # REMOVE ESSA PEXTE AQUI PRARVER SE VAI FUNCINAR
+    todo_mundo_jogou = rodada % 3 == 0
+
     if todo_mundo_jogou:
         print('\nCalculando probabilidade das peças...')
 
@@ -119,10 +122,6 @@ while True:
         print(f'\nJogador 02: {probalidade_pecas_jogador_02}')
         print(f'\nJogador 02 pesos: {jogador_02.retorna_pecas_peso()}')
         print(f'\nJogador 03: {probalidade_pecas_jogador_03}')
-        # print(f'\nJogador 03 pesos: {jogador_03.retorna_pecas_peso()}')
-        # print(f'\nDorme: {probalidade_pecas_dorme}')
-        print(pecas_dorme.retorna_pecas_peso())
+        print(f'\nDorme: {probalidade_pecas_dorme}\n')
 
         print(f'\nAnalise e escolha a melhor peça para jogar.')
-
-    pecas_jogadas_jogador(int(jogador_vez), eval(peca_jogada), int(cabeca))

@@ -18,7 +18,6 @@ class jogador():
             if cabeca in chave:
                 self.pecas_pesos[chave] += 1
 
-
     def retorna_pecas_peso(self):
         return self.pecas_pesos
 
@@ -47,10 +46,9 @@ class dorme:
         }
         self.pecas_porcentagem = {}
 
-   
     def guardar_cabeca_jogada(self, cabeca):
         for chave in self.pecas_pesos.keys():
-            if cabeca != chave:
+            if cabeca not in chave:
                 self.pecas_pesos[chave] += 1
 
     def diminue_quant_pecas_restantes(self):
@@ -61,9 +59,6 @@ class dorme:
 
     def retorna_pecas_peso(self):
         return self.pecas_pesos
-
-    def retorna_pecas_porcentagem(self):
-        return self.pecas_porcentagem
 
     def remove_peca_dorme(self, peca):
         self.pecas_dorme.remove(peca)
