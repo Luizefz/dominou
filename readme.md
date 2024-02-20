@@ -64,4 +64,4 @@ Este projeto foi desenvolvido como parte da disciplina de Matemática Discreta 2
 
 ## Alunos:
 1. [Luiz Eduardo](https://github.com/Luizefz)
-2. [Luis Filipe](https://github.com/LuisFilipeOliveiraSantos)
+2. [Luis Filipe Oliveira](https://github.com/LuisFilipeOliveiraSantos)
