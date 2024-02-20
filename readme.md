@@ -63,5 +63,5 @@ Assim como o exemplo abaixo:
 Este projeto foi desenvolvido como parte da disciplina de Matemática Discreta 2, como parte dos requisitos de avaliação.
 
 ## Alunos:
-1. [Luiz Eduardo](Github.com/luizefz)
-2. [Luis Filipe](Github.com/LuisFilipeOliveiraSantos)
+1. [Luiz Eduardo](https://github.com/Luizefz)
+2. [Luis Filipe](https://github.com/LuisFilipeOliveiraSantos)
