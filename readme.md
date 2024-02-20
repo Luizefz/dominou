@@ -62,6 +62,6 @@ Assim como o exemplo abaixo:
 # Nota sobre o Projeto 
 Este projeto foi desenvolvido como parte da disciplina de Matemática Discreta 2, como parte dos requisitos de avaliação.
 
-Alunos:
-[Luiz Eduardo](Github.com/luizefz)
-[Luis Filipe](Github.com/LuisFilipeOliveiraSantos)
+## Alunos:
+1. [Luiz Eduardo](Github.com/luizefz)
+2. [Luis Filipe](Github.com/LuisFilipeOliveiraSantos)
